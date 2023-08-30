@@ -6,7 +6,7 @@ from app.api.endpoints import orders
 
 app = FastAPI()
 
-app.include_router(orders.router, prefix="/api")
+app.include_router(orders.router)
 
 
 @app.exception_handler(RequestValidationError)
