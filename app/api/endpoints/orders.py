@@ -16,17 +16,17 @@ def random_delay():
 
 
 @router.get("/")
-def read_root():
+async def read_root():
     return {"message": "Forex Trading Platform API"}
 
 @router.get("/orders")
-def get_orders(): 
+async def get_orders(): 
     random_delay()
     orders = list(orders_db.values())
     return orders
 
 @router.post("/orders",status_code=201)
-def create_order(order: OrderInput):
+async def create_order(order: OrderInput):
     random_delay()
     global order_count 
     order_count += 1
@@ -35,7 +35,7 @@ def create_order(order: OrderInput):
     return new_order
 
 @router.get("/orders/{orderid}")
-def get_order_byID(orderid: int):
+async def get_order_byID(orderid: int):
     random_delay()
     if orderid not in orders_db:
         raise HTTPException(status_code=404, detail=error_404.model_dump())
