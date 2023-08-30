@@ -1,9 +1,10 @@
 import random
 import time
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, WebSocket
 from app.api.models.order import OrderInput, OrderOutput
 from app.api.models.enums import OrderStatus
 from app.api.endpoints.errors import error_404
+from app.websocket import websocket_manager
 
 router = APIRouter()
 
@@ -50,3 +51,7 @@ async def cancelOrder(orderid: int):
     cancelled_order = orders_db[orderid]
     cancelled_order.status=OrderStatus.canceled
     return 
+
+@router.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket_manager.connect(websocket)
