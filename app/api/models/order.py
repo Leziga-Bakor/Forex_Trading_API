@@ -2,11 +2,11 @@ from pydantic import BaseModel
 from app.api.models.enums import OrderStatus
 
 class OrderInput(BaseModel):
-    stocks: str
+    stoks: str
     quantity: float
 
 class OrderOutput(BaseModel):
     id: str
-    stocks: str
+    stoks: str
     quantity: float
     status: OrderStatus
