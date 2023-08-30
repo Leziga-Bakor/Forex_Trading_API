@@ -41,11 +41,12 @@ async def get_order_byID(orderid: int):
         raise HTTPException(status_code=404, detail=error_404.model_dump())
     return orders_db[orderid]
 
-@router.delete("/orders/{orderid}",status_code=204)
+@router.delete("/orders/{orderid}", status_code=204)
 async def cancelOrder(orderid: int):
     """Cancel and Order"""
     random_delay()
     if orderid not in orders_db:
         raise HTTPException(status_code=404, detail=error_404.model_dump())
-    deleted_order = orders_db.pop(orderid)
-    return deleted_order
+    cancelled_order = orders_db[orderid]
+    cancelled_order.status=OrderStatus.canceled
+    return 
