@@ -10,6 +10,10 @@ router = APIRouter()
 orders_db = {}
 order_count=0
 
+def random_delay():
+    random_delay = random.uniform(0.1, 1)
+    time.sleep(random_delay)
+
 
 @router.get("/")
 def read_root():
@@ -17,11 +21,13 @@ def read_root():
 
 @router.get("/orders")
 def get_orders(): 
+    random_delay()
     orders = list(orders_db.values())
     return orders
 
 @router.post("/orders",status_code=201)
 def create_order(order: OrderInput):
+    random_delay()
     global order_count 
     order_count += 1
     new_order = OrderOutput(id=str(order_count), stoks=order.stoks, quantity=order.quantity, status=OrderStatus.pending)
@@ -30,6 +36,7 @@ def create_order(order: OrderInput):
 
 @router.get("/orders/{orderid}")
 def get_order_byID(orderid: int):
+    random_delay()
     if orderid not in orders_db:
         raise HTTPException(status_code=404, detail=error_404.model_dump())
     return orders_db[orderid]
@@ -37,6 +44,7 @@ def get_order_byID(orderid: int):
 @router.delete("/orders/{orderid}",status_code=204)
 async def cancelOrder(orderid: int):
     """Cancel and Order"""
+    random_delay()
     if orderid not in orders_db:
         raise HTTPException(status_code=404, detail=error_404.model_dump())
     deleted_order = orders_db.pop(orderid)
