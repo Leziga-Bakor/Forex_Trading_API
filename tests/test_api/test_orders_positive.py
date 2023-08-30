@@ -13,6 +13,8 @@ def test_place_order(base_url):
     assert response.status_code == 201
     assert "id" in response.json()
     assert response.json()["status"] == "pending"
+    assert response.json()["stoks"] == order_data["stoks"]
+    assert response.json()["quantity"] == order_data["quantity"]
     
 
 def test_get_order(base_url):
