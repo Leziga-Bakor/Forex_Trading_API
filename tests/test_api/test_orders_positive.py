@@ -26,4 +26,4 @@ def test_cancel_order(base_url):
     assert response.status_code == 204
     response = requests.get(f"{base_url}/orders/1")
     assert response.json()["status"] == "cancelled"
-    
+  
