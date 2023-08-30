@@ -22,8 +22,14 @@ def test_get_order(base_url):
     
 
 def test_cancel_order(base_url):
-    response = requests.delete(f"{base_url}/orders/1")
+
+    order_data = {"stoks": "AMZE", "quantity": 10}
+    response = requests.post(f"{base_url}/orders", json=order_data)
+    assert response.status_code == 201
+    assert response.json()["status"] == "pending"
+    order_id = int(response.json()["id"])
+    response = requests.delete(f"{base_url}/orders/{order_id}")
     assert response.status_code == 204
-    response = requests.get(f"{base_url}/orders/1")
+    response = requests.get(f"{base_url}/orders/{order_id}")
     assert response.json()["status"] == "cancelled"
   
