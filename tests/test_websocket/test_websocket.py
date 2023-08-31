@@ -31,6 +31,11 @@ async def test_websocket_notification():
             await websocket1.send(json.dumps(order_data))
             await websocket1.recv()  
             
+            notification_data = await websocket1.recv()
+            notification_json = json.loads(notification_data)
+            
+            assert "notification" in notification_json
+
             notification_data = await websocket2.recv()
             notification_json = json.loads(notification_data)
             
