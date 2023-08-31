@@ -1,9 +1,6 @@
 import pytest
 import json
 import websockets
-from app.websocket import WebSocketManager
-
-websocket_manager = WebSocketManager()
 
 @pytest.mark.asyncio
 async def test_websocket_order_processing():
