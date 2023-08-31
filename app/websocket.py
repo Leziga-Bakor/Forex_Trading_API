@@ -1,9 +1,11 @@
 import asyncio
 import random
+import json
 from fastapi import WebSocket
-from fastapi.exceptions import WebSocketDisconnect
-from app.api.endpoints.orders import create_order
+from fastapi.websockets import WebSocketDisconnect
 from app.api.models.order import OrderInput
+from app.api.endpoints.orders import create_order
+
 
 class WebSocketManager:
     def __init__(self):
@@ -15,12 +17,14 @@ class WebSocketManager:
         try:
             while True:
                 data = await websocket.receive_text()
+                data = json.loads(data)
                 await self.process_order(websocket, data)
         except WebSocketDisconnect:
             self.active_connections.remove(websocket)
 
-    async def process_order(self, websocket: WebSocket, data: dict):
-        order = await create_order(OrderInput(**data))
+    async def process_order(self, websocket: WebSocket, data: dict):       
+        order_data=OrderInput(stoks=data["stoks"], quantity=data["quantity"])
+        order = await create_order(order_data)
         response_data = {
             "orderId": order.id,
             "orderStatus": order.status
