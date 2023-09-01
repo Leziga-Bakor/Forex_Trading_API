@@ -22,7 +22,6 @@ async def validation_exception_handler(request, exc):
     Returns:
         JSONResponse: An HTTP 400 response with details of the validation errors.
     """
-    message = "Invalid Input"
     return JSONResponse(content=error_400.model_dump(), status_code=400)
 
 @app.websocket("/ws")
