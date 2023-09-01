@@ -3,8 +3,8 @@ import json
 import websockets
 
 @pytest.mark.asyncio
-async def test_websocket_order_processing():
-    async with websockets.connect("ws://127.0.0.1:8000/ws") as websocket:
+async def test_websocket_order_processing(base_url):
+    async with websockets.connect(f"{base_url}") as websocket:
         order_data = {
             "stoks": "GBPUSD",
             "quantity": 22
@@ -18,9 +18,9 @@ async def test_websocket_order_processing():
         assert "orderStatus" in response_json
 
 @pytest.mark.asyncio
-async def test_websocket_notification():
-    async with websockets.connect("ws://localhost:8000/ws") as websocket1:
-        async with websockets.connect("ws://localhost:8000/ws") as websocket2:
+async def test_websocket_notification(base_url):
+    async with websockets.connect(f"{base_url}") as websocket1:
+        async with websockets.connect(f"{base_url}") as websocket2:
             order_data = {
                 "stoks": "JYPCHF",
                 "quantity": 40
