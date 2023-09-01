@@ -5,7 +5,11 @@ from app.api.endpoints.errors import error_400
 from app.api.endpoints import orders
 from app.websocket import websocket_manager
 
-app = FastAPI()
+app = FastAPI(
+    title="Forex Trading Platform API",
+    version="1.0.0",
+    description="RESTful API server that exposes a set of endpoints to simulate a trading platform",
+)
 
 app.include_router(orders.router)
 
