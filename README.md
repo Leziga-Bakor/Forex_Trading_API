@@ -58,5 +58,9 @@ Note the html for the test can be foun in "/tmp/report.html" in the test contain
   $ docker cp <container_id>:/tmp/report.html /path/on/host/report.html
   ```
 
+## Performance test
+Performance test that runs 100 simultaneous POST requeest on the API can be found for http and ws in the test/ directory.
+From the test/ directory you can use python to run the files when the server is on
+
 ## Swagger Documentation
 After starting the server this can be found at "http://localhost:8080/docs".
