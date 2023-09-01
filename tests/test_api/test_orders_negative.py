@@ -2,12 +2,12 @@ import pytest
 import requests
 
 def test_get_nonexistent_order(base_url):
-    response = requests.get(f"{base_url}/orders/999")
+    response = requests.get(f"{base_url}/orders/9999")
     assert response.status_code == 404
     assert response.json()["detail"] == {"code": 404, "message": "Order not found"}
 
 def test_cancel_nonexistent_order(base_url):
-    response = requests.delete(f"{base_url}/orders/999")
+    response = requests.delete(f"{base_url}/orders/9999")
     assert response.status_code == 404
     assert response.json()["detail"] == {"code": 404, "message": "Order not found"}
     
