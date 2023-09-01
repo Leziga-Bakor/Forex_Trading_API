@@ -24,7 +24,7 @@ Description: RESTful API server that exposes a set of endpoints to simulate a tr
     Due to the use of f-strings, this must be run with python 3.6+. 
     The Docker image is based on python:3.9-slim
 
-# Building Docker Images
+## Building Docker Images
 
 **API Docker**
 To build the API Docker image, run the following command in the root directory:
