@@ -30,7 +30,7 @@ async def read_root():
     Returns:
         dict: A dictionary containing a message indicating the API's root endpoint.
     """
-    return {"message": "Forex Trading Platform API"}
+    return {"message": "Welcome to Forex Trading Platform API"}
 
 
 @router.get("/orders")
