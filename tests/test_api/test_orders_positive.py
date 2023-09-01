@@ -1,6 +1,12 @@
 import pytest
 import requests
 
+def test_base(base_url):
+    response = requests.get(f"{base_url}/")
+    assert response.status_code == 200
+    assert response.json() == {"message":"Forex Trading Platform API"}
+
+
 def test_get_orders(base_url):
     response = requests.get(f"{base_url}/orders")
     assert response.status_code == 200
