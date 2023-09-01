@@ -59,4 +59,4 @@ Note the html for the test can be foun in "/tmp/report.html" in the test contain
   ```
 
 ## Swagger Documentation
-After starting the server this can be found at "http://localhost:8000/docs".
+After starting the server this can be found at "http://localhost:8080/docs".
