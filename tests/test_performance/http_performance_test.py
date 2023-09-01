@@ -34,8 +34,8 @@ concurrent.futures.wait(http_futures)
 
 # Calculate average execution delay and standard deviation for HTTP requests
 http_delays = [(b - a) for a, b in http_timestamps]
-http_average_delay = sum(http_delays) / num_http_requests
-http_std_deviation = statistics.stdev(http_delays)
+http_average_delay = round(sum(http_delays) / num_http_requests,3)
+http_std_deviation = round(statistics.stdev(http_delays),3)
 
 # Print out the results for HTTP requests
 print(f"HTTP Average Execution Delay: {http_average_delay} seconds")
