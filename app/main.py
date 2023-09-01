@@ -12,6 +12,16 @@ app.include_router(orders.router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc):
+    """
+    Handle validation errors in the Forex Trading Platform API.
+
+    Args:
+        request (Request): The incoming HTTP request that triggered the validation error.
+        exc (ValidationError): The validation error object containing details of the errors.
+
+    Returns:
+        JSONResponse: An HTTP 400 response with details of the validation errors.
+    """
     message = "Invalid Input"
     return JSONResponse(content=error_400.model_dump(), status_code=400)
 
